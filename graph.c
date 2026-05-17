@@ -42,43 +42,25 @@ Graph* createGraph() {
 
 void addNode(Graph* g, const char* label) {
     if (!g || !label) return;
-
-    // Verificar si el nodo ya existe
     if (map_search(g->adjacencyMap, (void*)label) != NULL)
         return;
-
-    // Crear copia del label
     char* labelCopy = strdup(label);
     if (!labelCopy) return;
-
-    // Crear lista vacía de aristas
     List* edgesList = list_create();
     if (!edgesList) {
         free(labelCopy);
         return;
     }
-
-    // Insertar en el mapa
     map_insert(g->adjacencyMap, labelCopy, edgesList);
 }
 
 void addEdge(Graph* g, const char* src, const char* dest, int weight) {
     if (!g || !src || !dest) return;
-
-    // Buscar nodo origen
     MapPair* pair = map_search(g->adjacencyMap, (void*)src);
-
-    // Si no existe
     if (!pair) return;
-
-    // Obtener lista de adyacencia
     List* edgesList = (List*)pair->value;
-
-    // Crear nueva arista
     Edge* newEdge = (Edge*)malloc(sizeof(Edge));
     if (!newEdge) return;
-
-    // Asignar datos
     newEdge->weight = weight;
     newEdge->target = strdup(dest);
 
@@ -86,8 +68,6 @@ void addEdge(Graph* g, const char* src, const char* dest, int weight) {
         free(newEdge);
         return;
     }
-
-    // Insertar arista
     list_pushBack(edgesList, newEdge);
 }
 
