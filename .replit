@@ -22,9 +22,9 @@ args = "Run Tests"
 name = "Run Tests"
 author = "agent"
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "gcc -g test.c list.c map.c -Wall -o a.out && ./a.out"
-
 [workflows.workflow.metadata]
 outputType = "console"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "gcc -c list.c -o list.o && gcc -c map.c -o map.o && gcc -g test.c list.o map.o -o a.out && ./a.out"
