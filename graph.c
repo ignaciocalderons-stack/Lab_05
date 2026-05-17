@@ -65,27 +65,29 @@ void addNode(Graph* g, const char* label) {
 void addEdge(Graph* g, const char* src, const char* dest, int weight) {
     if (!g || !src || !dest) return;
 
-    // Buscar lista de adyacencia del nodo origen
-    List* edgesList = (List*)map_search(g->adjacencyMap, (void*)src);
+    // Buscar nodo origen
+    MapPair* pair = map_search(g->adjacencyMap, (void*)src);
 
-    // Si el nodo origen no existe
-    if (!edgesList) return;
+    // Si no existe
+    if (!pair) return;
+
+    // Obtener lista de adyacencia
+    List* edgesList = (List*)pair->value;
 
     // Crear nueva arista
     Edge* newEdge = (Edge*)malloc(sizeof(Edge));
     if (!newEdge) return;
 
-    // Asignar peso
+    // Asignar datos
     newEdge->weight = weight;
-
-    // Copiar destino
     newEdge->target = strdup(dest);
+
     if (!newEdge->target) {
         free(newEdge);
         return;
     }
 
-    // Agregar arista a la lista
+    // Insertar arista
     list_pushBack(edgesList, newEdge);
 }
 
