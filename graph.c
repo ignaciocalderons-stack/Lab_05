@@ -94,7 +94,14 @@ void addEdge(Graph* g, const char* src, const char* dest, int weight) {
 List* getEdges(Graph* g, const char* label) {
     if (!g || !label) return NULL;
 
-    return NULL;
+    // Buscar nodo en el mapa
+    MapPair* pair = map_search(g->adjacencyMap, (void*)label);
+
+    // Si no existe
+    if (!pair) return NULL;
+
+    // Retornar lista de aristas
+    return (List*)pair->value;
 }
 
 int getWeight(Graph* g, const char* label1, const char* label2) {
