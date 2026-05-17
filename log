@@ -6,3 +6,27 @@ Fri May  8 10:07:21 PM UTC 2026:
  tests:  0|6
 ========================================
 36e8bf5
+Sun May 17 08:42:09 PM UTC 2026: 
+ graph.c | 19 ++++++++++++++++---
+ 1 file changed, 16 insertions(+), 3 deletions(-)
+Compilation failed
+test.c: In function ‘addNode’:
+test.c:279:5: error: ‘main’ is normally a non-static function [-Werror=main]
+  279 | int main(int argc, char *argv[]) {
+      |     ^~~~
+test.c:303:1: error: expected declaration or statement at end of input
+  303 | }
+      | ^
+test.c:15:6: error: unused variable ‘msg’ [-Werror=unused-variable]
+   15 | char msg[500];
+      |      ^~~
+test.c: At top level:
+test.c:279:5: error: ‘main’ defined but not used [-Werror=unused-function]
+  279 | int main(int argc, char *argv[]) {
+      |     ^~~~
+In file included from test.c:5:
+graph.c:70:7: error: ‘getAdjacentLabels’ defined but not used [-Werror=unused-function]
+   70 | List* getAdjacentLabels(Graph* g, const char* label) {
+      |       ^~~~~~~~~~~~~~~~~
+cc1: all warnings being treated as errors
+d582216
