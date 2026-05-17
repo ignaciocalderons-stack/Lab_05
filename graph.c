@@ -80,7 +80,28 @@ List* getEdges(Graph* g, const char* label) {
 
 int getWeight(Graph* g, const char* label1, const char* label2) {
     if (!g || !label1 || !label2) return -1;
-    return -1; 
+
+    // Obtener lista de aristas del nodo origen
+    List* edgesList = getEdges(g, label1);
+
+    // Si el nodo origen no existe
+    if (!edgesList) return -1;
+
+    // Recorrer lista de aristas
+    Edge* edge = (Edge*)list_first(edgesList);
+
+    while (edge != NULL) {
+
+        // Comparar destino
+        if (strcmp(edge->target, label2) == 0) {
+            return edge->weight;
+        }
+
+        edge = (Edge*)list_next(edgesList);
+    }
+
+    // No se encontró la arista
+    return -1;
 }
 
 List* getAdjacentLabels(Graph* g, const char* label) {
